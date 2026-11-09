@@ -64,8 +64,8 @@ export default async function AgreementPage({ params, searchParams }: { params: 
       />
       {created && <Alert tone="positive" className="mb-4">حُفظت الاتفاقية {ag.number}. اطبعها ليوقّع العميل.</Alert>}
       <div className="grid gap-4 xl:grid-cols-[1fr_320px]">
-        <div className="overflow-x-auto">
-          <div className="min-w-[640px]">
+        <div className="overflow-x-auto rounded-card bg-ink-200 px-4 dark:bg-surface-2">
+          <div className="w-fit min-w-full">
             <AgreementDocument ag={ag} s={s} />
           </div>
         </div>

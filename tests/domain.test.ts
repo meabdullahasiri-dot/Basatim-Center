@@ -48,3 +48,16 @@ describe('permissions', () => {
     expect(can({ role: 'staff', permissions: ['invoices'] }, 'agreements')).toBe(false);
   });
 });
+
+import { amountInWords } from '../src/domain/amount-words';
+import { cssString } from '../src/domain/print';
+
+describe('print helpers', () => {
+  it('writes amounts in Arabic words', () => {
+    expect(amountInWords(59000)).toBe('فقط خمسمائة وتسعون ريال لا غير');
+    expect(amountInWords(125050)).toBe('فقط ألف ومائتان وخمسون ريال وخمسون هللة لا غير');
+  });
+  it('escapes CSS strings', () => {
+    expect(cssString('a"b</style>')).toBe('"a\\"b\\3C /style>"');
+  });
+});

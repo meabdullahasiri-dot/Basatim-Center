@@ -460,24 +460,56 @@
   }
 }
 
-/* ---------------- الطباعة ---------------- */
-@page {
-  size: A4;
-  margin: 10mm;
+/* ---------------- الطباعة (بنفس أسلوب ركين) ---------------- */
+.print-page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  padding: 12mm 10mm;
+  background: #fff;
+  color: #1b1e24;
+  color-scheme: light;
+  /* عمود، حتى يستقر الختم والتوقيعات (.print-foot) أسفل الورقة. */
+  display: flex;
+  flex-direction: column;
 }
+.print-foot {
+  margin-top: auto;
+  padding-top: 1rem;
+  break-inside: avoid;
+}
+
 @media print {
+  .print-page {
+    zoom: 1 !important;
+  }
+  html,
+  body {
+    background: white !important;
+    color: black !important;
+  }
   .no-print {
     display: none !important;
   }
-  body {
-    background: #fff !important;
-  }
-  .print-sheet {
+  /* ارتفاع الورقة القابل للطباعة (الورقة ناقص الهوامش، ناقص 2 مم احتياطاً) حتى يبقى الختم أسفل الورقة دون صفحة فارغة. */
+  .print-page {
+    width: auto;
+    min-height: calc(297mm - 26mm - 2mm);
+    margin: 0;
+    padding: 0 1mm;
     box-shadow: none !important;
-    margin: 0 !important;
-    border: 0 !important;
-    width: auto !important;
-    min-height: 0 !important;
-    padding: 0 !important;
+    border: none !important;
+  }
+  .avoid-break {
+    break-inside: avoid;
+  }
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* الهامش السفلي يحمل سطر التذييل ورقم الصفحة في كل ورقة (PrintSheet). */
+  @page {
+    size: A4 portrait;
+    margin: 12mm 10mm 14mm;
   }
 }

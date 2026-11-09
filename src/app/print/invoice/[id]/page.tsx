@@ -15,9 +15,9 @@ export default async function PrintInvoice({ params }: { params: Promise<{ id: s
   if (!inv) notFound();
   const s = await getSettings();
   return (
-    <div className="min-h-screen bg-canvas pb-10">
+    <>
       <PrintToolbar title={`فاتورة ${inv.number}`} />
       <InvoiceDocument inv={inv} s={s} />
-    </div>
+    </>
   );
 }

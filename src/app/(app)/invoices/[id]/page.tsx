@@ -68,8 +68,8 @@ export default async function InvoicePage({ params, searchParams }: { params: Pr
       {created && <Alert tone="positive" className="mb-4">صدرت الفاتورة {inv.number}.</Alert>}
       {inv.status === 'void' && <Alert tone="warning" className="mb-4">هذه الفاتورة ملغاة. السبب: {inv.voidReason}</Alert>}
       <div className="grid gap-4 xl:grid-cols-[1fr_320px]">
-        <div className="overflow-x-auto">
-          <div className="min-w-[640px]">
+        <div className="overflow-x-auto rounded-card bg-ink-200 px-4 dark:bg-surface-2">
+          <div className="w-fit min-w-full">
             <InvoiceDocument inv={inv} s={s} />
           </div>
         </div>

@@ -15,9 +15,9 @@ export default async function PrintAgreement({ params }: { params: Promise<{ id:
   if (!ag) notFound();
   const s = await getSettings();
   return (
-    <div className="min-h-screen bg-canvas pb-10">
+    <>
       <PrintToolbar title={`اتفاقية ${ag.number}`} />
       <AgreementDocument ag={ag} s={s} />
-    </div>
+    </>
   );
 }
