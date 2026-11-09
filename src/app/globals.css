@@ -1,0 +1,483 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * نظام تصميم بساتم — مبني على بنية نظام تصميم ركين (الإصدار 3):
+ *   1. ألوان الهوية: «جمر» برتقالي ناري (brand) على «جرافيت» داكن (ink).
+ *   2. لوحات أساسية 50–950 للحالات: green / amber / red / sky.
+ *   3. رموز دلالية (canvas, surface, fg, line, primary…) تتبدّل مع الوضع الداكن.
+ * الخطوط: IBM Plex Sans Arabic للنظام (من ركين) و Thmanyah Sans للعناوين التسويقية (من موقع السيرة الذاتية).
+ */
+@theme {
+  --font-sans: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif;
+  --font-display: 'Thmanyah Sans', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+
+  --color-brand-50: #fff6ed;
+  --color-brand-100: #ffead4;
+  --color-brand-200: #ffd0a8;
+  --color-brand-300: #ffae71;
+  --color-brand-400: #ff8238;
+  --color-brand-500: #fe6111;
+  --color-brand-600: #ef4707;
+  --color-brand-700: #c63408;
+  --color-brand-800: #9d2b0f;
+  --color-brand-900: #7e2610;
+  --color-brand-950: #441006;
+
+  --color-ink-50: #f6f7f9;
+  --color-ink-100: #eceef2;
+  --color-ink-200: #d5d9e0;
+  --color-ink-300: #b1b8c4;
+  --color-ink-400: #868fa0;
+  --color-ink-500: #677185;
+  --color-ink-600: #525a6c;
+  --color-ink-700: #434957;
+  --color-ink-800: #2c3039;
+  --color-ink-900: #1b1e24;
+  --color-ink-950: #0f1115;
+
+  --color-green-50: #e3ffec;
+  --color-green-100: #cbfbda;
+  --color-green-300: #8cd4a5;
+  --color-green-500: #1d9b5c;
+  --color-green-700: #086036;
+  --color-amber-50: #fff5ea;
+  --color-amber-300: #f1b369;
+  --color-amber-400: #ed990e;
+  --color-amber-700: #704500;
+  --color-amber-950: #261200;
+  --color-red-50: #fff4f2;
+  --color-red-300: #fea69b;
+  --color-red-500: #e63935;
+  --color-red-600: #cc2827;
+  --color-red-700: #9a000b;
+  --color-sky-50: #eef9ff;
+  --color-sky-300: #86cbf3;
+  --color-sky-700: #065779;
+
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 22px;
+  --radius-card: 22px;
+  --radius-dialog: 28px;
+  --radius-sig: 6px;
+
+  --text-large-title: 34px;
+  --text-large-title--line-height: 44px;
+  --text-large-title--font-weight: 700;
+  --text-title-1: 28px;
+  --text-title-1--line-height: 38px;
+  --text-title-1--font-weight: 700;
+  --text-title-2: 22px;
+  --text-title-2--line-height: 32px;
+  --text-title-2--font-weight: 700;
+  --text-title-3: 20px;
+  --text-title-3--line-height: 30px;
+  --text-title-3--font-weight: 600;
+  --text-headline: 17px;
+  --text-headline--line-height: 26px;
+  --text-headline--font-weight: 600;
+  --text-body: 15px;
+  --text-body--line-height: 24px;
+  --text-callout: 14px;
+  --text-callout--line-height: 22px;
+  --text-subheadline: 13px;
+  --text-subheadline--line-height: 20px;
+  --text-footnote: 12px;
+  --text-footnote--line-height: 18px;
+  --text-caption: 12px;
+  --text-caption--line-height: 16px;
+  --text-numeric: 30px;
+  --text-numeric--line-height: 38px;
+  --text-numeric--font-weight: 700;
+
+  --spacing-control-sm: 32px;
+  --spacing-control-md: 40px;
+  --spacing-control-lg: 48px;
+  --spacing-touch: 44px;
+  --spacing-sidebar: 264px;
+  --spacing-header: 64px;
+  --container-content: 1280px;
+
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.36, 0.64, 1);
+}
+
+@theme inline {
+  --color-canvas: var(--bg-canvas);
+  --color-surface: var(--bg-default);
+  --color-surface-2: var(--bg-default-secondary);
+  --color-surface-3: var(--bg-default-tertiary);
+  --color-surface-hover: var(--bg-default-hover);
+  --color-elevated: var(--bg-elevated);
+  --color-material: var(--bg-material);
+  --color-overlay: var(--bg-overlay);
+  --color-field: var(--fill-field);
+  --color-field-hover: var(--fill-field-hover);
+  --color-primary: var(--bg-brand);
+  --color-primary-hover: var(--bg-brand-hover);
+  --color-primary-pressed: var(--bg-brand-pressed);
+  --color-primary-soft: var(--bg-brand-secondary);
+  --color-primary-tint: var(--bg-brand-tertiary);
+  --color-primary-tint-hover: var(--bg-brand-tertiary-hover);
+  --color-neutral: var(--bg-neutral);
+  --color-positive: var(--bg-positive);
+  --color-positive-soft: var(--bg-positive-secondary);
+  --color-warning: var(--bg-warning);
+  --color-warning-soft: var(--bg-warning-secondary);
+  --color-danger: var(--bg-danger);
+  --color-danger-hover: var(--bg-danger-hover);
+  --color-danger-soft: var(--bg-danger-secondary);
+  --color-info: var(--bg-info);
+  --color-info-soft: var(--bg-info-secondary);
+  --color-disabled: var(--bg-disabled);
+
+  --color-fg: var(--text-default);
+  --color-fg-secondary: var(--text-default-secondary);
+  --color-fg-tertiary: var(--text-default-tertiary);
+  --color-fg-brand: var(--text-brand);
+  --color-fg-positive: var(--text-positive);
+  --color-fg-warning: var(--text-warning);
+  --color-fg-danger: var(--text-danger);
+  --color-fg-info: var(--text-info);
+  --color-fg-disabled: var(--text-disabled);
+  --color-on-primary: #ffffff;
+  --color-on-neutral: var(--bg-default);
+
+  --color-line: var(--border-default);
+  --color-line-strong: var(--border-strong);
+  --color-line-focus: var(--border-focus);
+  --color-line-danger: var(--border-danger);
+
+  --color-icon: var(--icon-default);
+  --color-icon-secondary: var(--icon-secondary);
+  --color-icon-brand: var(--icon-brand);
+
+  --shadow-1: var(--bs-shadow-1);
+  --shadow-2: var(--bs-shadow-2);
+  --shadow-3: var(--bs-shadow-3);
+  --shadow-4: var(--bs-shadow-4);
+  --shadow-brand: var(--bs-shadow-brand);
+  --shadow-focus: var(--bs-shadow-focus);
+}
+
+@layer base {
+  :root {
+    --bg-canvas: #f4f5f7;
+    --bg-default: #ffffff;
+    --bg-default-secondary: var(--color-ink-50);
+    --bg-default-tertiary: var(--color-ink-100);
+    --bg-default-hover: var(--color-ink-50);
+    --bg-elevated: #ffffff;
+    --bg-material: #ffffffc2;
+    --bg-overlay: #0f111566;
+    --bg-brand: var(--color-brand-700);
+    --bg-brand-hover: var(--color-brand-800);
+    --bg-brand-pressed: var(--color-brand-900);
+    --bg-brand-secondary: var(--color-brand-50);
+    --bg-brand-tertiary: #ef470714;
+    --bg-brand-tertiary-hover: #ef470724;
+    --bg-neutral: var(--color-ink-900);
+    --fill-field: #76768014;
+    --fill-field-hover: #7676801f;
+    --bg-positive: var(--color-green-700);
+    --bg-positive-secondary: var(--color-green-50);
+    --bg-warning: var(--color-amber-400);
+    --bg-warning-secondary: var(--color-amber-50);
+    --bg-danger: var(--color-red-600);
+    --bg-danger-hover: var(--color-red-700);
+    --bg-danger-secondary: var(--color-red-50);
+    --bg-info: var(--color-sky-700);
+    --bg-info-secondary: var(--color-sky-50);
+    --bg-disabled: var(--color-ink-100);
+
+    --text-default: var(--color-ink-900);
+    --text-default-secondary: var(--color-ink-600);
+    --text-default-tertiary: var(--color-ink-500);
+    --text-brand: var(--color-brand-700);
+    --text-positive: var(--color-green-700);
+    --text-warning: var(--color-amber-700);
+    --text-danger: var(--color-red-700);
+    --text-info: var(--color-sky-700);
+    --text-disabled: var(--color-ink-400);
+
+    --border-default: var(--color-ink-200);
+    --border-strong: var(--color-ink-300);
+    --border-focus: var(--color-brand-600);
+    --border-danger: var(--color-red-600);
+
+    --icon-default: var(--color-ink-700);
+    --icon-secondary: var(--color-ink-500);
+    --icon-brand: var(--color-brand-700);
+
+    --bs-shadow-1: 0 1px 2px rgba(15, 17, 21, 0.06), 0 1px 1px rgba(15, 17, 21, 0.04);
+    --bs-shadow-2: 0 1px 2px rgba(15, 17, 21, 0.06), 0 8px 24px -8px rgba(15, 17, 21, 0.14);
+    --bs-shadow-3: 0 4px 8px -2px rgba(15, 17, 21, 0.08), 0 16px 40px -8px rgba(15, 17, 21, 0.2);
+    --bs-shadow-4: 0 8px 16px -4px rgba(15, 17, 21, 0.1), 0 32px 64px -12px rgba(15, 17, 21, 0.28);
+    --bs-shadow-brand: 0 6px 16px -6px rgba(239, 71, 7, 0.55);
+    --bs-shadow-focus: 0 0 0 3px rgba(239, 71, 7, 0.28);
+
+    --chart-income: #e8590c;
+    --chart-expense: #2f6fb3;
+    --dur-fast: 120ms;
+    --dur-base: 200ms;
+    --dur-slow: 320ms;
+    color-scheme: light;
+  }
+
+  .dark {
+    --bg-canvas: #0b0c0f;
+    --bg-default: #15171c;
+    --bg-default-secondary: #1c1f25;
+    --bg-default-tertiary: #252830;
+    --bg-default-hover: #1f2229;
+    --bg-elevated: #1f2229;
+    --bg-material: #13151ac2;
+    --bg-overlay: #000000a3;
+    --bg-brand: var(--color-brand-600);
+    --bg-brand-hover: var(--color-brand-500);
+    --bg-brand-pressed: var(--color-brand-700);
+    --bg-brand-secondary: #2c1a12;
+    --bg-brand-tertiary: #ff823824;
+    --bg-brand-tertiary-hover: #ff823833;
+    --bg-neutral: var(--color-ink-100);
+    --fill-field: #7676803d;
+    --fill-field-hover: #7676804d;
+    --bg-positive-secondary: #14281f;
+    --bg-warning-secondary: #2b2314;
+    --bg-danger-hover: var(--color-red-500);
+    --bg-danger-secondary: #2f1a1c;
+    --bg-info-secondary: #13232d;
+    --bg-disabled: var(--color-ink-800);
+
+    --text-default: var(--color-ink-100);
+    --text-default-secondary: var(--color-ink-300);
+    --text-default-tertiary: #a3abb8;
+    --text-brand: var(--color-brand-300);
+    --text-positive: var(--color-green-300);
+    --text-warning: var(--color-amber-300);
+    --text-danger: var(--color-red-300);
+    --text-info: var(--color-sky-300);
+    --text-disabled: var(--color-ink-600);
+
+    --border-default: #2a2e36;
+    --border-strong: var(--color-ink-700);
+    --border-focus: var(--color-brand-400);
+
+    --icon-default: var(--color-ink-200);
+    --icon-secondary: var(--color-ink-400);
+    --icon-brand: var(--color-brand-300);
+
+    --bs-shadow-1: 0 0 0 1px rgba(255, 255, 255, 0.04);
+    --bs-shadow-2: 0 0 0 1px rgba(255, 255, 255, 0.05);
+    --bs-shadow-3: 0 0 0 1px rgba(255, 255, 255, 0.07), 0 16px 40px -8px rgba(0, 0, 0, 0.6);
+    --bs-shadow-4: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 32px 64px -12px rgba(0, 0, 0, 0.7);
+    --chart-income: #e65a10;
+    --chart-expense: #4a8bd6;
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+  p, li {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--color-brand-500);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+  }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+  .num {
+    font-variant-numeric: tabular-nums;
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+}
+
+/* ---------------- الموقع التسويقي ---------------- */
+@layer components {
+  .site {
+    font-size: 17px;
+    line-height: 1.8;
+  }
+  .site h1, .site h2, .site h3, .font-display {
+    font-family: var(--font-display);
+  }
+  .site-wrap {
+    width: min(1180px, 100% - 32px);
+    margin-inline: auto;
+  }
+  .grad-text {
+    background: linear-gradient(90deg, var(--color-brand-400), var(--color-brand-600) 55%, #ffb347);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform;
+  }
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-brand);
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .kicker::before {
+    content: '';
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--color-brand-400), var(--color-brand-700));
+  }
+  /* بطاقة بتوهج يتبع المؤشر (من موقع السيرة الذاتية) */
+  .glow-card {
+    position: relative;
+    --mx: 50%;
+    --my: 50%;
+    isolation: isolate;
+  }
+  .glow-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(320px circle at var(--mx) var(--my), rgba(254, 97, 17, 0.14), transparent 65%);
+    opacity: 0;
+    transition: opacity 0.35s;
+    z-index: -1;
+  }
+  .glow-card:hover::before {
+    opacity: 1;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+  .no-js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .road {
+    background-image: repeating-linear-gradient(90deg, var(--color-brand-500) 0 28px, transparent 28px 52px);
+    height: 4px;
+    border-radius: 2px;
+    animation: road 1.6s linear infinite;
+  }
+  @keyframes road {
+    to {
+      background-position: -52px 0;
+    }
+  }
+  .scan-bar {
+    animation: scan 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+  }
+  @keyframes scan {
+    from {
+      transform: translateX(20px);
+    }
+    to {
+      transform: translateX(530px);
+    }
+  }
+  .wheel {
+    animation: spin 2.4s linear infinite;
+  }
+  .float-y {
+    animation: floaty 5s ease-in-out infinite;
+  }
+  @keyframes floaty {
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+  .site-nav a.on {
+    color: var(--text-default);
+  }
+  .site-nav a.on::after {
+    transform: scaleX(1);
+  }
+  .spin-slow {
+    animation: spin 18s linear infinite;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .grid-bg {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at 50% 30%, #000 30%, transparent 75%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------------- الطباعة ---------------- */
+@page {
+  size: A4;
+  margin: 10mm;
+}
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+  }
+  .print-sheet {
+    box-shadow: none !important;
+    margin: 0 !important;
+    border: 0 !important;
+    width: auto !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+  }
+}
