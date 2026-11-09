@@ -393,6 +393,16 @@
     opacity: 1;
     transform: none;
   }
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
   .road {
     background-image: repeating-linear-gradient(90deg, var(--color-brand-500) 0 28px, transparent 28px 52px);
     height: 4px;
@@ -440,11 +450,48 @@
       transform: rotate(360deg);
     }
   }
+  /* شبكة خفيفة: خطوط داكنة في الوضع الفاتح، وفاتحة في الداكن */
   .grid-bg {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(15, 17, 21, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15, 17, 21, 0.05) 1px, transparent 1px);
     background-size: 44px 44px;
     mask-image: radial-gradient(ellipse at 50% 30%, #000 30%, transparent 75%);
+  }
+  .dark .grid-bg,
+  .grid-bg.on-dark {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  }
+  /* بطاقات الفريق: قلب ثلاثي الأبعاد + ميلان يتبع المؤشر */
+  .flip-scene {
+    perspective: 1100px;
+  }
+  .flip-card {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform: rotateX(var(--rx, 0deg)) rotateY(calc(var(--ry, 0deg) + var(--flip, 0deg)));
+  }
+  .flip-card[data-flipped='true'] {
+    --flip: 180deg;
+  }
+  .flip-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: inherit;
+    overflow: hidden;
+  }
+  .flip-back {
+    transform: rotateY(180deg);
+  }
+  .gauge-needle {
+    transform-origin: 60px 60px;
+    transition: transform 1.2s cubic-bezier(0.34, 1.36, 0.64, 1) 0.25s;
+  }
+  .step-car {
+    transition: inset-inline-start 0.9s cubic-bezier(0.65, 0, 0.35, 1);
   }
 }
 

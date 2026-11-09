@@ -31,19 +31,19 @@ export function StatCard({
     <div
       className={cn(
         'relative h-full overflow-hidden rounded-card p-4 shadow-2 transition-[transform,box-shadow] duration-[var(--dur-fast)] sm:p-5',
-        emphasis ? 'bg-ink-950 text-white dark:bg-surface-3' : 'bg-surface',
+        emphasis ? 'bg-gradient-to-br from-brand-600 to-brand-800 text-white dark:from-surface-3 dark:to-surface-3' : 'bg-surface',
         href && 'hover:-translate-y-px hover:shadow-3',
       )}
     >
-      {emphasis && <div className="pointer-events-none absolute -top-16 -start-10 size-48 rounded-full bg-brand-500/25 blur-3xl" aria-hidden="true" />}
+      {emphasis && <div className="pointer-events-none absolute -top-16 -start-10 size-48 rounded-full bg-white/15 blur-3xl dark:bg-brand-500/25" aria-hidden="true" />}
       <div className="relative flex items-start justify-between gap-3">
-        <span className={cn('text-subheadline font-medium', emphasis ? 'text-ink-300' : 'text-fg-secondary')}>{label}</span>
-        <span className={cn('grid size-10 shrink-0 place-items-center rounded-xl rounded-es-sig', emphasis ? 'bg-brand-600 text-white' : tones[tone])}>
+        <span className={cn('text-subheadline font-medium', emphasis ? 'text-white/85 dark:text-ink-300' : 'text-fg-secondary')}>{label}</span>
+        <span className={cn('grid size-10 shrink-0 place-items-center rounded-xl rounded-es-sig', emphasis ? 'bg-white/20 text-white dark:bg-brand-600' : tones[tone])}>
           <Icon className="size-5" aria-hidden="true" />
         </span>
       </div>
       <div className="relative mt-2 text-title-2 sm:text-numeric num text-start">{value}</div>
-      {detail && <div className={cn('relative mt-1 text-footnote', emphasis ? 'text-ink-300' : 'text-fg-tertiary')}>{detail}</div>}
+      {detail && <div className={cn('relative mt-1 text-footnote', emphasis ? 'text-white/80 dark:text-ink-300' : 'text-fg-tertiary')}>{detail}</div>}
     </div>
   );
   return href ? (

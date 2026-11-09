@@ -31,7 +31,7 @@ export default async function TeamPage() {
               {list.map((m) => (
                 <Card key={m.id}>
                   <div className="flex items-start gap-3">
-                    <span className="grid size-12 shrink-0 place-items-center rounded-2xl rounded-es-sig bg-ink-950 font-display text-[20px] font-bold text-brand-400">{m.name.charAt(0)}</span>
+                    <span className="grid size-12 shrink-0 place-items-center rounded-2xl rounded-es-sig bg-primary-tint font-display text-[20px] font-bold text-fg-brand dark:bg-ink-950 dark:text-brand-400">{m.name.charAt(0)}</span>
                     <div className="min-w-0 flex-1">
                       <div className="font-semibold">{m.name}</div>
                       <div className="text-footnote text-fg-brand">{m.title}</div>

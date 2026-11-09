@@ -51,23 +51,23 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
   return (
     <>
       {denied && <Alert tone="warning" className="mb-4">ليست لديك صلاحية لفتح تلك الصفحة. اطلب من مدير المركز منحك الصلاحية.</Alert>}
-      <section className="relative mb-6 overflow-hidden rounded-card bg-ink-950 p-6 text-white shadow-3 sm:p-8">
+      <section className="relative mb-6 overflow-hidden rounded-card bg-surface p-6 text-fg shadow-2 sm:p-8 dark:bg-ink-950 dark:text-white dark:shadow-3">
         <div className="grid-bg absolute inset-0" aria-hidden="true" />
-        <div className="glow -top-32 -start-16 size-96 bg-[radial-gradient(closest-side,rgba(254,97,17,.35),transparent)]" aria-hidden="true" />
-        <Wrench className="absolute -bottom-6 end-6 size-40 -rotate-12 text-white/5" aria-hidden="true" />
+        <div className="glow -top-32 -start-16 size-96 bg-[radial-gradient(closest-side,rgba(254,97,17,.18),transparent)] dark:bg-[radial-gradient(closest-side,rgba(254,97,17,.35),transparent)]" aria-hidden="true" />
+        <Wrench className="absolute -bottom-6 end-6 size-40 -rotate-12 text-ink-900/[.04] dark:text-white/5" aria-hidden="true" />
         <div className="relative flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="text-callout text-ink-300">
+            <p className="text-callout text-fg-secondary dark:text-ink-300">
               {fmtHijri(new Date())} · <span className="num">{fmtDate(today)}</span>
             </p>
             <h1 className="mt-1 font-display text-[32px] font-bold leading-tight sm:text-[40px]">
               {greet}، <span className="grad-text">{user.name.split(' ')[0]}</span>
             </h1>
-            <p className="mt-1 text-body text-ink-300">هذا ملخص المركز اليوم.</p>
+            <p className="mt-1 text-body text-fg-secondary dark:text-ink-300">هذا ملخص المركز اليوم.</p>
           </div>
           <div className="flex flex-wrap gap-2">
             {canAgr && (
-              <Link href="/agreements/new" className="inline-flex h-11 items-center gap-2 rounded-xl bg-white/10 px-4 text-callout font-semibold text-white backdrop-blur hover:bg-white/15">
+              <Link href="/agreements/new" className="inline-flex h-11 items-center gap-2 rounded-xl bg-field px-4 text-callout font-semibold text-fg hover:bg-field-hover dark:bg-white/10 dark:text-white dark:hover:bg-white/15">
                 <FileSignature className="size-[18px]" aria-hidden="true" />
                 استلام سيارة
               </Link>

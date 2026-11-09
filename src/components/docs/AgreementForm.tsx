@@ -62,7 +62,7 @@ export function AgreementForm({ terms, technicians }: { terms: string; technicia
           </div>
         </div>
       </Card>
-      <div className="no-print fixed inset-x-0 bottom-0 z-20 border-t border-line bg-material backdrop-blur-xl lg:ps-sidebar">
+      <div className="no-print fixed inset-x-0 bottom-0 z-20 border-t border-line bg-material backdrop-blur-xl lg:ps-[var(--sb-w,264px)]">
         <div className="mx-auto flex max-w-content items-center justify-end gap-3 px-4 py-3 sm:px-6 lg:px-8">
           <SubmitButton size="lg">
             <Save aria-hidden="true" />

@@ -1,8 +1,8 @@
 'use client';
-import { useActionState } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import { CalendarCheck, CircleCheck } from 'lucide-react';
 import { bookingAction } from '@/server/actions/booking';
-import { SERVICES } from '@/config/site';
+import { PICK_SERVICE_EVENT, SERVICES } from '@/config/site';
 import { Alert } from '../ui/Alert';
 import { Field, SelectInput, TextArea, TextInput } from '../ui/Field';
 import { SubmitButton } from '../ui/SubmitButton';
@@ -10,6 +10,13 @@ import { SubmitButton } from '../ui/SubmitButton';
 export function BookingForm({ minDate }: { minDate: string }) {
   const [state, action] = useActionState(bookingAction, null);
   const fe = state?.fieldErrors ?? {};
+  const [service, setService] = useState('');
+  // زر «احجز هذه الخدمة» في قسم الخدمات يختار الخدمة هنا تلقائياً.
+  useEffect(() => {
+    const onPick = (e: Event) => setService(String((e as CustomEvent<string>).detail ?? ''));
+    window.addEventListener(PICK_SERVICE_EVENT, onPick);
+    return () => window.removeEventListener(PICK_SERVICE_EVENT, onPick);
+  }, []);
   if (state?.ok) {
     return (
       <div className="flex flex-col items-center py-10 text-center">
@@ -34,7 +41,7 @@ export function BookingForm({ minDate }: { minDate: string }) {
         <TextInput id="b-car" name="car" placeholder="مثال: تويوتا كامري 2021" />
       </Field>
       <Field label="الخدمة المطلوبة" name="b-service">
-        <SelectInput id="b-service" name="service" defaultValue="">
+        <SelectInput id="b-service" name="service" value={service} onChange={(e) => setService(e.target.value)}>
           <option value="">— اختر —</option>
           {SERVICES.map((s) => (
             <option key={s.title}>{s.title}</option>
